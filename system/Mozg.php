@@ -9,7 +9,6 @@
 
 namespace Mozg;
 
-use Sura\Corner\Error;
 use Mozg\exception\ErrorException;
 use Sura\Http\Request;
 use JsonException;
@@ -18,178 +17,94 @@ use Mozg\classes\{I18n, DB};
 
 class Mozg
 {
-    /**
-     * @throws ErrorException|JsonException
-     */
-    public static function initialize(): mixed
-    {
-        if (isset($_POST['PHPSESSID'])) {
-            \session_id($_POST['PHPSESSID']);
-        }
+  /**
+   * @throws ErrorException|JsonException
+   */
+  public static function initialize(): mixed
+  { 
+  $lang = I18n::dictionary();
+  Registry::set('lang', $lang);
 
-        //        $db = require ENGINE_DIR . '/data/db_config.php';
-        //        Registry::set('db', $db);
+  Registry::set('server_time', \time());
 
-        //        $checkLang = I18n::getLang();
-        $lang = I18n::dictionary();
-        Registry::set('lang', $lang);
+  $router = Router::fromGlobals();
+  $params = [];
+  $routers = [
+    '/' => 'Main@main',
+    '/api/authorize' => 'Auth@authorize',
+    '/api/account/register' => 'Auth@register',
+    '/api/account/getinfo' => 'Profile@getInfo',
+    '/api/account/restore' => 'Auth@restore',
+    '/api/account/reset_password' => 'Auth@reset_password',
+    '/api/account/change_pass' => 'Settings@change_pass',
+    '/api/account/change_name' => 'Settings@change_name',
+    '/api/account/change_avatar' => 'Settings@change_avatar',
+    '/api/account/change_bio' => 'Profile@bioEdit',
+    '/api/users/profile' => 'Profile@profile',
 
-        //        $config = settings_get();
-        Registry::set('server_time', \time());
-        (new classes\Auth)->login();
-        //        if ($config['offline'] === 'yes') {
-        //            include ENGINE_DIR . '/modules/offline.php';
-        //        }
-        /** @var array $user_info */
-        $user_info = Registry::get('user_info');
-        //        if ($user_info['user_delet'] > 0) {
-        //            include_once ENGINE_DIR . '/modules/profile_delet.php';
-        //        }
-        //        if ((Registry::get('logged') && $user_info['user_ban_date'] >= Registry::get('server_time')) || (Registry::get('logged') && ($user_info['user_ban_date'] === '0'))) {
-        //            include_once ENGINE_DIR . '/modules/profile_ban.php';
-        //        }
+    '/api/albums/all' => 'Albums@all',   
 
-        /**
-         * Если юзер авторизован,
-         * то обновляем последнюю дату посещения в таблице друзей и на личной стр
-         */
-        if (Registry::get('logged')) {
-            //Начисления 1 убм.
-            if (empty($user_info['user_lastupdate'])) {
-                $user_info['user_lastupdate'] = 1;
-            }
-            $server_time = Registry::get('server_time');
-            //Определяем устройство
-            $device_user = 0;
-            if (empty($user_info['user_last_visit'])) {
-                $user_info['user_last_visit'] = $server_time;
-            }
+    '/api/search' => 'Search@all',            
 
-            if (($user_info['user_last_visit'] + 60) <= $server_time) {
-                if (\date('Y-m-d', $user_info['user_lastupdate']) < \date('Y-m-d', $server_time)) {
-                    DB::getDB()->update('users', [
-                        'user_logged_mobile' => $device_user,
-                        'user_last_visit' => $server_time,
-                        'user_balance' => 'user_balance + 1',
-                        'user_lastupdate' => $server_time,
-                    ], [
-                        'user_id' => $user_info['user_id']
-                    ]);
-                } else {
-                    DB::getDB()->update('users', [
-                        'user_logged_mobile' => $device_user,
-                        'user_last_visit' => $server_time,
-                    ], [
-                        'user_id' => $user_info['user_id']
-                    ]);
-                }
-            }
-        }
+    '/api/friends/add' => 'Friends@add',
+    '/api/friends/delete' => 'Friends@delete',
+    '/api/friends/all' => 'Friends@all',
+    '/api/friends/search' => 'Friends@search',
+    '/api/friends/requests' => 'Friends@requests',
+    '/api/friends/online' => 'Friends@online',
+    '/api/friends/common' => 'Friends@common',
 
-        $router = Router::fromGlobals();
-        $params = [];
-        $routers = [
-            '/' => 'Home@main',
-            '/api/authorize' => 'Api@authorize',
-            '/api/account/register' => 'Api@register',
-            '/api/account/getinfo' => 'Api@getinfo',
-            '/api/account/restore' => 'Api@restore',
-            '/api/account/reset_password' => 'Api@reset_password',
-            '/api/account/change_pass' => 'Api@change_pass',
-            '/api/account/change_name' => 'Api@change_name',
-            '/api/account/change_avatar' => 'Api@change_avatar',
-            '/api/users/profile' => 'Profile@profile',
-            '/api/albums/all' => 'Albums@all',            
-            '/api/search' => 'Search@all',            
-            
-            '/api' => 'Api@main',
-            '/api/profile' => 'Profile@api',
+    '/api/messages/send' => 'Messages@send',
+    '/api/messages/read' => 'Messages@read',
+    '/api/messages/typograf' => 'Messages@typograf',
+    '/api/messages/delete' => 'Messages@delete',
 
+    '/api/feed/all' => 'Newsfeed@all',
 
-            '/register/send' => 'Register@send',
-            '/register/rules' => 'Register@rules',
-            '/register/step2' => 'Register@step2',
-            '/register/step3' => 'Register@step3',
-            '/register/activate' => 'Register@activate',
-            '/register/finish' => 'Register@finish',
-            '/login' => 'Register@login',
+    '/api/notifications/get' => 'Notifications@get',
+    '/api/notifications/all' => 'Notifications@all',
+    '/api/notifications/test' => 'Notifications@addTest',
 
-            '/u:num' => 'Profile@main',
-            '/u:numafter' => 'Profile@main',
+    '/api/wall/add' => 'Wall@add',
+    '/api/wall/remove' => 'Wall@remove',
+    '/api/wall/comment/add' => 'Wall@addComment',
+    '/api/wall/comment/remove' => 'Wall@removeComment',
+    '/api/wall/like' => 'Wall@like',
+    '/api/wall/unlike' => 'Wall@unlike',
+    '/api/wall/all' => 'Wall@all',
 
-            '/public:num' => 'Communities@main',
+  ];
+  $router->add($routers);
 
-            //restore
-            '/restore' => 'Restore@main',
-            '/restore/next' => 'Restore@next',
-            '/restore/next/' => 'Restore@next',
-            '/restore/send' => 'Restore@send',
-            '/restore/prefinish' => 'Restore@preFinish',
-
-            '/wall:num' => 'WallPage@main',
-            '/wall:num_:num' => 'WallPage@main',
-
-            '/security/img' => 'Captcha@captcha',
-            '/security/code' => 'Captcha@code',
-
-            '/langs/box' => 'Lang@main',
-            '/langs/change' => 'Lang@change',
-
-            '/balance' => 'Balance@main',
-            '/balance/payment_2' => 'Balance@payment_2',
-            '/balance/ok_payment' => 'Balance@ok_payment',
-
-            '/balance/payment' => 'Balance@createOrderBox',
-
-            '/support' => 'Support@main',
-
-            '/messages' => 'Im@main',
-
-            '/settings' => 'Settings@main',
-            '/wall/send' => 'Wall@sendRecord',
-
-            '/updates' => 'Updates@main',
-            '/search' => 'Search@main',
-            '/news' => 'News@main',
-
-            '/editprofile/delete/photo' => 'Editprofile@deletePhoto',
-            '/editmypage' => 'Editprofile@main',
-
-            // '/admin/' => 'Admin@main',
-        ];
-        $router->add($routers);
-
-        if ($router->isFound()) {
-            $router->executeHandler($router::getRequestHandler(), $params);
-        } else {
-            //todo update
-            $module = isset($_GET['go']) ?
-                htmlspecialchars(strip_tags(stripslashes(trim(urldecode($_GET['go']))))) : 'Home';
-            $action = (new Request)->filter('act');
-            $class = ucfirst($module);
-            if (!class_exists($class) || $action === '' || $class === 'Wall') {
-
-                $text = 'error 404';
-                $params = [
-                    'title' => $text,
-                    'text' => $text,
-                ];
-                view('info.info', $params);
-            } else {
-                $controller = new $class();
-                $params['params'] = '';
-                $params = [$params];
-                try {
-                    return call_user_func_array([$controller, $action], $params);
-                } catch (Error $error) {
-                    $params = [
-                        'title' => 'error 500',
-                        'text' => 'error 500',
-                    ];
-                    view('info.info', $params);
-                }
-            }
-        }
-        return '';//fixme
+  if ($router->isFound()) {
+    $router->executeHandler($router::getRequestHandler(), $params);
+  } else {
+    $module = isset($_GET['go']) ?
+    htmlspecialchars(strip_tags(stripslashes(trim(urldecode($_GET['go']))))) : 'Home';
+    $action = (new Request)->filter('act');
+    $class = ucfirst($module);
+    if (!class_exists($class) || $action === '' || $class === 'Wall') {
+    $text = 'error 404';
+    $params = [
+      'title' => $text,
+      'text' => $text,
+    ];
+    view('info.info', $params);
+    } else {
+    $controller = new $class();
+    $params['params'] = '';
+    $params = [$params];
+    try {
+      return call_user_func_array([$controller, $action], $params);
+    } catch (ErrorException $error) {
+      $params = [
+      'title' => 'error 500',
+      'text' => 'error 500',
+      ];
+      view('info.info', $params);
     }
+    }
+  }
+  return true;
+  }
 }
