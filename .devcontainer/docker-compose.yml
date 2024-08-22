@@ -5,7 +5,7 @@ services:
     volumes:
       - ../:/workspace:cached
     ports:
-      - 80:80
+      - 5183:5183
     tty: true
     environment:
         APP_ENV: local
