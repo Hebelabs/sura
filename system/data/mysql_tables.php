@@ -8,9 +8,9 @@
  *
  */
 
-$db_table = $db_table ?? [];
+$table_Chema = $table_Chema ?? [];
 
-$db_table[] = "CREATE TABLE `pay` (
+$tableSchema[] = "CREATE TABLE `pay` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `amount` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
@@ -19,14 +19,14 @@ $db_table[] = "CREATE TABLE `pay` (
   `status` int(11) NOT NULL DEFAULT '0',
   `product` int(11) NOT NULL
 );";
-$db_table[] = "CREATE TABLE `room` (
+$table_Chema[] = "CREATE TABLE `room` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(100) NOT NULL DEFAULT '',
   `owner` bigint(20) NOT NULL DEFAULT '0',
   `photo` varchar(255) NOT NULL DEFAULT '',
   `date` varchar(10) NOT NULL DEFAULT '0'
 );";
-$db_table[] = "CREATE TABLE `room_users` (
+$table_Chema[] = "CREATE TABLE `room_users` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `room_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `oid` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
@@ -34,7 +34,7 @@ $db_table[] = "CREATE TABLE `room_users` (
   `date` varchar(10) NOT NULL DEFAULT '0',
   `type` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 );";
-$db_table[] = "CREATE TABLE `albums` (
+$table_Chema[] = "CREATE TABLE `albums` (
   `aid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -53,7 +53,7 @@ $db_table[] = "CREATE TABLE `albums` (
   KEY `privacy` (`privacy`),
   KEY `ahash` (`ahash`)
 );";
-$db_table[] = "CREATE TABLE `attach` (
+$table_Chema[] = "CREATE TABLE `attach` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `photo` varchar(255) NOT NULL,
   `ouser_id` int(11) NOT NULL,
@@ -63,7 +63,7 @@ $db_table[] = "CREATE TABLE `attach` (
   KEY `photo` (`photo`),
   KEY `public_id` (`public_id`)
 );";
-$db_table[] = "CREATE TABLE `antispam` (
+$table_Chema[] = "CREATE TABLE `antispam` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `act` tinyint(3) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -72,7 +72,7 @@ $db_table[] = "CREATE TABLE `antispam` (
   KEY `act` (`act`,`user_id`,`date`),
   KEY `act_2` (`act`,`user_id`,`date`,`txt`)
 );";
-$db_table[] = "CREATE TABLE `attach_comm` (
+$table_Chema[] = "CREATE TABLE `attach_comm` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `forphoto` varchar(30) NOT NULL,
   `auser_id` int(11) NOT NULL,
@@ -80,7 +80,7 @@ $db_table[] = "CREATE TABLE `attach_comm` (
   `adate` varchar(10) NOT NULL,
   KEY `forphoto` (`forphoto`)
 );";
-$db_table[] = "CREATE TABLE `audio` (
+$table_Chema[] = "CREATE TABLE `audio` (
   `aid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `id` int(11) unsigned NOT NULL,
   `auser_id` int(11) unsigned NOT NULL,
@@ -97,28 +97,28 @@ $db_table[] = "CREATE TABLE `audio` (
   KEY `adate` (`adate`),
   FULLTEXT KEY `artist` (`artist`,`name`)
 );";
-$db_table[] = "CREATE TABLE `banned` (
+$table_Chema[] = "CREATE TABLE `banned` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `descr` text NOT NULL,
   `date` varchar(15) NOT NULL,
   `always` smallint(4) NOT NULL,
   `ip` varchar(50) NOT NULL
 );";
-$db_table[] = "CREATE TABLE `blog` (
+$table_Chema[] = "CREATE TABLE `blog` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(65) NOT NULL,
   `story` text NOT NULL,
   `date` varchar(15) NOT NULL,
   KEY `date` (`date`)
 );";
-$db_table[] = "CREATE TABLE `city` (
+$table_Chema[] = "CREATE TABLE `city` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `id_country` int(11) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   KEY `id_country` (`id_country`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3349 ;";
 /*
-$db_table[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
+$table_Chema[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
 (1, 1, 'Москва'),
 (2, 1, 'Абрамцево'),
 (3, 1, 'Алабино'),
@@ -1743,7 +1743,7 @@ $db_table[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
 (1622, 1, 'Терней'),
 (1623, 1, 'Уссурийск');";
 
-$db_table[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
+$table_Chema[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
 (1624, 1, 'Фокино'),
 (1625, 1, 'Хасан'),
 (1626, 1, 'Хороль'),
@@ -3348,7 +3348,7 @@ $db_table[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
 (3225, 2, 'Полонное'),
 (3226, 2, 'Славута');";
 
-$db_table[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
+$table_Chema[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
 (3227, 2, 'Старая Синява'),
 (3228, 2, 'Староконстантинов'),
 (3229, 2, 'Теофиполь'),
@@ -3472,7 +3472,7 @@ $db_table[] = "INSERT INTO `city` (`id`, `id_country`, `name`) VALUES
 (3347, 7, 'Тарту'),
 (3348, 7, 'Хаапсалу');";
 */
-$db_table[] = "CREATE TABLE `communities` (
+$table_Chema[] = "CREATE TABLE `communities` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `admin` text NOT NULL,
   `title` varchar(60) NOT NULL,
@@ -3503,7 +3503,7 @@ $db_table[] = "CREATE TABLE `communities` (
   KEY `photo` (`photo`),
   FULLTEXT KEY `title` (`title`)
 );";
-$db_table[] = "CREATE TABLE `communities_audio` (
+$table_Chema[] = "CREATE TABLE `communities_audio` (
   `aid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `public_id` int(11) unsigned NOT NULL,
   `url` text NOT NULL,
@@ -3513,7 +3513,7 @@ $db_table[] = "CREATE TABLE `communities_audio` (
   KEY `auser_id` (`public_id`),
   KEY `adate` (`adate`)
 );";
-$db_table[] = "CREATE TABLE `communities_feedback` (
+$table_Chema[] = "CREATE TABLE `communities_feedback` (
   `cid` int(11) NOT NULL,
   `fuser_id` int(11) NOT NULL,
   `office` varchar(30) NOT NULL,
@@ -3524,7 +3524,7 @@ $db_table[] = "CREATE TABLE `communities_feedback` (
   KEY `fuser_id` (`fuser_id`),
   KEY `fdate` (`fdate`)
 );";
-$db_table[] = "CREATE TABLE `communities_forum` (
+$table_Chema[] = "CREATE TABLE `communities_forum` (
   `fid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `public_id` int(11) unsigned NOT NULL,
   `fuser_id` int(11) unsigned NOT NULL,
@@ -3543,7 +3543,7 @@ $db_table[] = "CREATE TABLE `communities_forum` (
   KEY `lastdate` (`lastdate`),
   KEY `fixed` (`fixed`)
 );";
-$db_table[] = "CREATE TABLE `communities_forum_msg` (
+$table_Chema[] = "CREATE TABLE `communities_forum_msg` (
   `mid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `fid` int(11) unsigned NOT NULL,
   `muser_id` int(11) unsigned NOT NULL,
@@ -3554,7 +3554,7 @@ $db_table[] = "CREATE TABLE `communities_forum_msg` (
   KEY `muser_id` (`muser_id`),
   KEY `mdate` (`mdate`)
 );";
-$db_table[] = "CREATE TABLE `communities_join` (
+$table_Chema[] = "CREATE TABLE `communities_join` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) NOT NULL,
   `for_user_id` int(11) NOT NULL,
@@ -3564,7 +3564,7 @@ $db_table[] = "CREATE TABLE `communities_join` (
   KEY `for_sel_1` (`user_id`,`public_id`,`date`),
   KEY `for_sel_2` (`for_user_id`,`public_id`,`user_id`)
 );";
-$db_table[] = "CREATE TABLE `communities_stats` (
+$table_Chema[] = "CREATE TABLE `communities_stats` (
   `gid` int(11) NOT NULL,
   `date` int(10) NOT NULL,
   `cnt` int(11) NOT NULL,
@@ -3580,14 +3580,14 @@ $db_table[] = "CREATE TABLE `communities_stats` (
   KEY `exit_users` (`exit_users`),
   KEY `sel_1` (`gid`,`date_x`)
 );";
-$db_table[] = "CREATE TABLE `communities_stats_log` (
+$table_Chema[] = "CREATE TABLE `communities_stats_log` (
   `gid` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `act` tinyint(3) NOT NULL,
   `date` int(10) NOT NULL,
   KEY `gid` (`gid`,`user_id`,`date`,`act`)
 );";
-$db_table[] = "CREATE TABLE `communities_wall` (
+$table_Chema[] = "CREATE TABLE `communities_wall` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `public_id` int(11) unsigned NOT NULL,
   `text` text NOT NULL,
@@ -3607,7 +3607,7 @@ $db_table[] = "CREATE TABLE `communities_wall` (
   KEY `add_date` (`add_date`),
   KEY `tell_date` (`tell_date`)
 );";
-$db_table[] = "CREATE TABLE `communities_wall_like` (
+$table_Chema[] = "CREATE TABLE `communities_wall_like` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `rec_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
@@ -3616,11 +3616,11 @@ $db_table[] = "CREATE TABLE `communities_wall_like` (
   KEY `user_id` (`user_id`),
   KEY `date` (`date`)
 );";
-$db_table[] = "CREATE TABLE `country` (
+$table_Chema[] = "CREATE TABLE `country` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL
 );";
-/*$db_table[] = "INSERT INTO `country` (`id`, `name`) VALUES
+/*$table_Chema[] = "INSERT INTO `country` (`id`, `name`) VALUES
 (4, 'Беларусь'),
 (3, 'Казахстан'),
 (2, 'Украина'),
@@ -3631,7 +3631,7 @@ $db_table[] = "CREATE TABLE `country` (
 (8, 'Азербайджан'),
 (9, 'Литва'),
 (10, 'США');";*/
-$db_table[] = "CREATE TABLE `doc` (
+$table_Chema[] = "CREATE TABLE `doc` (
   `did` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `duser_id` int(11) unsigned NOT NULL,
   `dname` varchar(255) NOT NULL,
@@ -3641,14 +3641,14 @@ $db_table[] = "CREATE TABLE `doc` (
   KEY `duser_id` (`duser_id`),
   KEY `ddate` (`ddate`)
 );";
-$db_table[] = "CREATE TABLE `fave` (
+$table_Chema[] = "CREATE TABLE `fave` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) unsigned NOT NULL,
   `fave_id` int(11) unsigned NOT NULL,
   `date` datetime NOT NULL,
   KEY `for_fast_select1` (`user_id`,`fave_id`,`date`)
 );";
-$db_table[] = "CREATE TABLE `friends` (
+$table_Chema[] = "CREATE TABLE `friends` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) NOT NULL,
   `friend_id` int(11) unsigned NOT NULL,
@@ -3660,14 +3660,14 @@ $db_table[] = "CREATE TABLE `friends` (
   KEY `views` (`views`),
   KEY `friends_date` (`friends_date`)
 );";
-$db_table[] = "CREATE TABLE `friends_demands` (
+$table_Chema[] = "CREATE TABLE `friends_demands` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `for_user_id` int(11) unsigned NOT NULL,
   `from_user_id` int(11) unsigned NOT NULL,
   `demand_date` datetime NOT NULL,
   KEY `for_fast_select1` (`for_user_id`,`from_user_id`,`demand_date`)
 );";
-$db_table[] = "CREATE TABLE `gifts` (
+$table_Chema[] = "CREATE TABLE `gifts` (
   `gid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `uid` int(11) unsigned NOT NULL,
   `from_uid` int(11) unsigned NOT NULL,
@@ -3681,14 +3681,14 @@ $db_table[] = "CREATE TABLE `gifts` (
   KEY `status` (`status`),
   KEY `gdate` (`gdate`)
 );";
-$db_table[] = "CREATE TABLE `gifts_list` (
+$table_Chema[] = "CREATE TABLE `gifts_list` (
   `gid` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `img` varchar(50) NOT NULL,
   `price` mediumint(8) NOT NULL,
   KEY `img` (`img`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;";
 /*
-$db_table[] = "INSERT INTO `gifts_list` (`gid`, `img`, `price`) VALUES
+$table_Chema[] = "INSERT INTO `gifts_list` (`gid`, `img`, `price`) VALUES
 (8, '11', 30),
 (9, '14', 3),
 (10, '22', 2),
@@ -3764,7 +3764,7 @@ $db_table[] = "INSERT INTO `gifts_list` (`gid`, `img`, `price`) VALUES
 (80, '501', 30),
 (82, '502', 20);";*/
 
-$db_table[] = "CREATE TABLE `im` (
+$table_Chema[] = "CREATE TABLE `im` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `iuser_id` int(11) unsigned NOT NULL,
   `im_user_id` int(11) unsigned NOT NULL,
@@ -3776,13 +3776,13 @@ $db_table[] = "CREATE TABLE `im` (
   KEY `im_user_id` (`im_user_id`),
   KEY `idate` (`idate`)
 );";
-$db_table[] = 'CREATE TABLE `invites` (
+$table_Chema[] = 'CREATE TABLE `invites` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `uid` int(11) NOT NULL,
   `ruid` int(11) NOT NULL,
   KEY `id` (`id`)
 );';
-$db_table[] = 'CREATE TABLE `log` (
+$table_Chema[] = 'CREATE TABLE `log` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `uid` int(11) NOT NULL,
   `browser` text NOT NULL,
@@ -3790,13 +3790,13 @@ $db_table[] = 'CREATE TABLE `log` (
   `device` varchar(255) NOT NULL,
   KEY `uid` (`uid`)
 );';
-$db_table[] = 'CREATE TABLE `mail_tpl` (
+$table_Chema[] = 'CREATE TABLE `mail_tpl` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `text` text NOT NULL
 );';
 
 
-//$db_table[] = "INSERT INTO `mail_tpl` (`id`, `text`) VALUES
+//$table_Chema[] = "INSERT INTO `mail_tpl` (`id`, `text`) VALUES
 //			(1, 'Доброго времени суток, {%user%}!\r\nПользователь {%user-friend%}, отправил Вам заявку на дружбу.\r\n\r\nПросмотреть заявку Вы можете по ссылке: https://{$_SERVER['HTTP_HOST']}/friends/requests\r\n\r\nС уважением, Социальная сеть.\r\nАдминистрация https://{$_SERVER['HTTP_HOST']}/'),
 //			(2, 'Доброго времени суток, {%user%}!\r\nПользователь {%user-friend%}, ответил на Вашу запись {%rec-link%}\r\n\r\nС уважением, Социальная сеть.\r\nАдминистрация https://{$_SERVER['HTTP_HOST']}/'),
 //			(3, 'Доброго времени суток, {%user%}!\r\nПользователь {%user-friend%}, оставил комментарий к Вашей видеозаписи {%rec-link%}\r\n\r\nС уважением, Социальная сеть.\r\nАдминистрация https://{$_SERVER['HTTP_HOST']}/'),
@@ -3806,7 +3806,7 @@ $db_table[] = 'CREATE TABLE `mail_tpl` (
 //			(7, 'Доброго времени суток, {%user%}!\r\nПользователь {%user-friend%}, оставил на Вашей стене новую запись.\r\n\r\nПросмотреть запись можете по ссылке: {%rec-link%}\r\n\r\nС уважением, Социальная сеть.\r\nАдминистрация https://{$_SERVER['HTTP_HOST']}/'),
 //			(8, 'Доброго времени суток, {%user%}!\r\nПользователь {%user-friend%}, отправил Вам новое личное сообщение.\r\n\r\nПросмотреть сообщение можете по ссылке: {%rec-link%}\r\n\r\nС уважением, Социальная сеть.\r\nАдминистрация https://{$_SERVER['HTTP_HOST']}/');";
 
-$db_table[] = "CREATE TABLE `messages` (
+$table_Chema[] = "CREATE TABLE `messages` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `id2` varchar(255) NOT NULL DEFAULT '0',
   `room_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
@@ -3834,7 +3834,7 @@ $db_table[] = "CREATE TABLE `messages` (
   KEY `history_user_id` (`history_user_id`),
   KEY `folder` (`folder`)
 );";
-$db_table[] = 'CREATE TABLE `news` (
+$table_Chema[] = 'CREATE TABLE `news` (
   `ac_id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `ac_user_id` int(11) unsigned NOT NULL,
   `action_type` tinyint(4) unsigned NOT NULL,
@@ -3850,7 +3850,7 @@ $db_table[] = 'CREATE TABLE `news` (
   KEY `obj_id` (`obj_id`),
   KEY `action_time` (`action_time`)
 );';
-$db_table[] = "CREATE TABLE `notes` (
+$table_Chema[] = "CREATE TABLE `notes` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `owner_user_id` int(11) unsigned NOT NULL,
   `title` varchar(65) NOT NULL,
@@ -3861,7 +3861,7 @@ $db_table[] = "CREATE TABLE `notes` (
   KEY `date` (`date`),
   FULLTEXT KEY `title` (`title`,`full_text`)
 );";
-$db_table[] = "CREATE TABLE `notes_comments` (
+$table_Chema[] = "CREATE TABLE `notes_comments` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `note_id` int(11) unsigned NOT NULL,
   `from_user_id` int(11) unsigned NOT NULL,
@@ -3871,7 +3871,7 @@ $db_table[] = "CREATE TABLE `notes_comments` (
   KEY `from_user_id` (`from_user_id`),
   KEY `add_date` (`add_date`)
 );";
-$db_table[] = "CREATE TABLE `photos` (
+$table_Chema[] = "CREATE TABLE `photos` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `album_id` int(11) unsigned NOT NULL,
   `photo_name` varchar(25) NOT NULL,
@@ -3889,7 +3889,7 @@ $db_table[] = "CREATE TABLE `photos` (
   KEY `date` (`date`),
   KEY `photo_name` (`photo_name`)
 );";
-$db_table[] = "CREATE TABLE `photos_comments` (
+$table_Chema[] = "CREATE TABLE `photos_comments` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `owner_id` int(11) unsigned NOT NULL,
   `album_id` int(11) unsigned NOT NULL,
@@ -3906,7 +3906,7 @@ $db_table[] = "CREATE TABLE `photos_comments` (
   KEY `photo_name` (`photo_name`),
   KEY `date` (`date`)
 );";
-$db_table[] = "CREATE TABLE `photos_mark` (
+$table_Chema[] = "CREATE TABLE `photos_mark` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `muser_id` int(11) unsigned NOT NULL,
   `mphoto_id` int(11) unsigned NOT NULL,
@@ -3920,7 +3920,7 @@ $db_table[] = "CREATE TABLE `photos_mark` (
   KEY `mdate` (`mdate`),
   FULLTEXT KEY `mphoto_name` (`mphoto_name`)
 );";
-$db_table[] = "CREATE TABLE `photos_rating` (
+$table_Chema[] = "CREATE TABLE `photos_rating` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `photo_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -3930,7 +3930,7 @@ $db_table[] = "CREATE TABLE `photos_rating` (
   KEY `for_select_1` (`id`,`user_id`),
   KEY `for_select_2` (`photo_id`,`user_id`)
 );";
-$db_table[] = "CREATE TABLE `report` (
+$table_Chema[] = "CREATE TABLE `report` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `act` varchar(10) NOT NULL,
   `type` smallint(5) unsigned NOT NULL,
@@ -3943,7 +3943,7 @@ $db_table[] = "CREATE TABLE `report` (
   KEY `act` (`act`),
   KEY `date` (`date`)
 );";
-$db_table[] = "CREATE TABLE `restore` (
+$table_Chema[] = "CREATE TABLE `restore` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `email` varchar(50) NOT NULL,
   `hash` varchar(32) NOT NULL,
@@ -3952,7 +3952,7 @@ $db_table[] = "CREATE TABLE `restore` (
   KEY `hash` (`hash`),
   KEY `ip` (`ip`)
 );";
-$db_table[] = "CREATE TABLE `sms_log` (
+$table_Chema[] = "CREATE TABLE `sms_log` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) NOT NULL,
   `from_u` varchar(20) NOT NULL,
@@ -3964,7 +3964,7 @@ $db_table[] = "CREATE TABLE `sms_log` (
   `date` varchar(10) NOT NULL,
   KEY `user_id` (`user_id`)
 );";
-$db_table[] = "CREATE TABLE `support` (
+$table_Chema[] = "CREATE TABLE `support` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(65) NOT NULL,
   `question` text NOT NULL,
@@ -3975,7 +3975,7 @@ $db_table[] = "CREATE TABLE `support` (
   KEY `suser_id` (`suser_id`),
   KEY `сdate` (`сdate`)
 );";
-$db_table[] = "CREATE TABLE `support_answers` (
+$table_Chema[] = "CREATE TABLE `support_answers` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `qid` int(11) unsigned NOT NULL,
   `auser_id` int(11) unsigned NOT NULL,
@@ -3985,26 +3985,25 @@ $db_table[] = "CREATE TABLE `support_answers` (
   KEY `auser_id` (`auser_id`),
   KEY `adate` (`adate`)
 );";
-$db_table[] = "CREATE TABLE `updates` (
+$table_Chema[] = "CREATE TABLE `updates` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `for_user_id` mediumint(8) unsigned NOT NULL,
   `from_user_id` mediumint(8) unsigned NOT NULL,
   `type` smallint(6) unsigned NOT NULL,
-  `viewed` INT( 11 ) unsigned NOT NULL,
   `date` varchar(10) NOT NULL,
   `text` text NOT NULL,
   `lnk` varchar(100) NOT NULL,
-  `user_name` varchar(50) NOT NULL,
+  `user_search_pref` varchar(50) NOT NULL,
   `user_photo` varchar(25) NOT NULL,
   KEY `for_user_id` (`for_user_id`),
   KEY `date` (`date`)
 );";
-$db_table[] = "CREATE TABLE `users` (
+$table_Chema[] = "CREATE TABLE `users` (
   `user_id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_email` varchar(50) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_name` varchar(30) NOT NULL,
-  `user_last_name` varchar(30) NOT NULL,
+  `user_lastname` varchar(30) NOT NULL,
   `user_photo` varchar(255) NOT NULL,
   `user_wall_id` int(11) NOT NULL,
   `user_birthday` varchar(30) NOT NULL,
@@ -4015,11 +4014,14 @@ $db_table[] = "CREATE TABLE `users` (
   `user_country` varchar(6) NOT NULL,
   `user_city` varchar(6) NOT NULL,
   `user_reg_date` varchar(20) NOT NULL,
-  `user_last_date` varchar(20) NOT NULL,
-  `user_last_update` varchar(10) NOT NULL,
+  `user_lastdate` varchar(20) NOT NULL,
   `user_group` varchar(1) NOT NULL,
   `user_hid` varchar(64) NOT NULL,
   `user_country_city_name` varchar(100) NOT NULL,
+  `user_search_pref` varchar(60) NOT NULL,
+  `user_xfields` text NOT NULL,
+  `xfields` text NOT NULL,
+  `user_xfields_all` text NOT NULL,
   `user_albums_num` smallint(6) NOT NULL,
   `user_friends_demands` int(11) NOT NULL,
   `user_friends_num` mediumint(8) NOT NULL,
@@ -4030,16 +4032,19 @@ $db_table[] = "CREATE TABLE `users` (
   `user_subscriptions_num` mediumint(8) NOT NULL,
   `user_videos_num` mediumint(8) NOT NULL,
   `user_wall_num` int(11) NOT NULL,
+  `user_status` varchar(255) NOT NULL,
   `user_privacy` varchar(250) NOT NULL,
   `user_blacklist_num` mediumint(8) NOT NULL,
   `user_blacklist` text NOT NULL,
   `user_sp` varchar(10) NOT NULL,
   `user_support` smallint(6) NOT NULL,
   `user_balance` mediumint(8) NOT NULL,
+  `user_lastupdate` varchar(10) NOT NULL,
   `user_gifts` mediumint(8) NOT NULL,
   `user_public_num` mediumint(8) NOT NULL,
   `user_audio` int(11) NOT NULL,
-  `user_delete` tinyint(3) NOT NULL,
+  `user_msg_type` tinyint(1) NOT NULL,
+  `user_delet` tinyint(3) NOT NULL,
   `user_ban` tinyint(3) NOT NULL,
   `user_ban_date` varchar(10) NOT NULL,
   `user_new_mark_photos` mediumint(8) NOT NULL,
@@ -4051,8 +4056,7 @@ $db_table[] = "CREATE TABLE `users` (
   `user_real` int(11) NOT NULL,
   `user_active` int(11) NOT NULL,
   `notify` varchar(255) NOT NULL,
-  `user_bio` varchar(255) NOT NULL,
-  FULLTEXT KEY `ft1` (`user_name`,`user_last_name`),
+  FULLTEXT KEY `ft1` (`user_name`,`user_lastname`),
   KEY `user_logged_hash` (`user_hid`),
   KEY `user_password` (`user_password`),
   KEY `user_email` (`user_email`),
@@ -4063,14 +4067,15 @@ $db_table[] = "CREATE TABLE `users` (
   KEY `user_day` (`user_day`),
   KEY `user_month` (`user_month`),
   KEY `user_year` (`user_year`),
-  KEY `user_delete` (`user_delete`),
+  KEY `user_delet` (`user_delet`),
   KEY `user_ban` (`user_ban`),
   KEY `user_reg_date` (`user_reg_date`),
   KEY `user_last_visit` (`user_last_visit`),
   KEY `user_sp` (`user_sp`),
-  KEY `user_rating` (`user_rating`)
-);";
-$db_table[] = "CREATE TABLE `users_rating` (
+  KEY `user_rating` (`user_rating`),
+  KEY `user_search_pref` (`user_search_pref`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+$table_Chema[] = "CREATE TABLE `users_rating` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) NOT NULL,
   `for_user_id` int(11) NOT NULL,
@@ -4078,7 +4083,7 @@ $db_table[] = "CREATE TABLE `users_rating` (
   `date` varchar(10) NOT NULL,
   KEY `for_select` (`user_id`)
 );";
-$db_table[] = "CREATE TABLE `users_stats` (
+$table_Chema[] = "CREATE TABLE `users_stats` (
     `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) unsigned NOT NULL,
   `users` int(11) unsigned NOT NULL,
@@ -4091,14 +4096,14 @@ $db_table[] = "CREATE TABLE `users_stats` (
   KEY `views` (`views`),
   KEY `users` (`users`)
 );";
-$db_table[] = "CREATE TABLE `users_stats_log` (
+$table_Chema[] = "CREATE TABLE `users_stats_log` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) unsigned NOT NULL,
   `for_user_id` int(11) unsigned NOT NULL,
   `date` int(8) unsigned NOT NULL,
   KEY `user_id` (`user_id`,`for_user_id`,`date`)
 );";
-$db_table[] = "CREATE TABLE `videos` (
+$table_Chema[] = "CREATE TABLE `videos` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `owner_user_id` int(11) unsigned NOT NULL,
   `public_id` int(11) unsigned NOT NULL,
@@ -4116,7 +4121,7 @@ $db_table[] = "CREATE TABLE `videos` (
   KEY `add_date` (`add_date`),
   FULLTEXT KEY `title` (`title`)
 );";
-$db_table[] = "CREATE TABLE `videos_comments` (
+$table_Chema[] = "CREATE TABLE `videos_comments` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `author_user_id` int(11) unsigned NOT NULL,
   `video_id` int(11) unsigned NOT NULL,
@@ -4125,13 +4130,13 @@ $db_table[] = "CREATE TABLE `videos_comments` (
   KEY `for_fast_select1` (`author_user_id`,`video_id`),
   KEY `add_date` (`add_date`)
 );";
-$db_table[] = "CREATE TABLE `votes` (
+$table_Chema[] = "CREATE TABLE `votes` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(80) NOT NULL,
   `answers` text NOT NULL,
   `answer_num` mediumint(8) NOT NULL
 );";
-$db_table[] = "CREATE TABLE `votes_result` (
+$table_Chema[] = "CREATE TABLE `votes_result` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
   `user_id` int(11) NOT NULL,
   `vote_id` int(11) NOT NULL,
@@ -4140,41 +4145,32 @@ $db_table[] = "CREATE TABLE `votes_result` (
   KEY `vote_id` (`vote_id`),
   KEY `answer` (`answer`)
 );";
-$db_table[] = "CREATE TABLE `wall` (
+$table_Chema[] = "CREATE TABLE `wall` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
-  `author` int(11) unsigned NOT NULL,
+  `author_user_id` int(11) unsigned NOT NULL,
   `for_user_id` int(11) unsigned NOT NULL,
-  `type` varchar(100) NOT NULL,    
-  `content` text NOT NULL,
+  `text` text NOT NULL,
   `add_date` varchar(15) NOT NULL,
-  `attach` text NOT NULL,  
-  `privacy` varchar(100) NOT NULL,  
-  `comments_num` mediumint(8) unsigned NOT NULL,
+  `fast_comm_id` int(11) unsigned NOT NULL,
+  `fasts_num` mediumint(8) unsigned NOT NULL,
   `likes_num` mediumint(8) unsigned NOT NULL,
+  `likes_users` text NOT NULL,
   `tell_uid` int(11) unsigned NOT NULL,
   `tell_date` varchar(11) NOT NULL,
-  `tell_id` text NOT NULL,
-  KEY `for_fast_select1` (`for_user_id`,`author`),
+  `type` varchar(100) NOT NULL,
+  `public` tinyint(1) unsigned NOT NULL,
+  `attach` text NOT NULL,
+  `tell_comm` text NOT NULL,
+  KEY `for_fast_select1` (`for_user_id`,`author_user_id`),
+  KEY `fast_comm_id` (`fast_comm_id`),
   KEY `tell_uid` (`tell_uid`,`tell_date`),
   KEY `add_date` (`add_date`)
 );";
-
-$db_table[] = "CREATE TABLE `wall_comments` (
+$table_Chema[] = "CREATE TABLE `wall_like` (
   `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
-  `wall_id`  int(11) unsigned NOT NULL,
-  `author` int(11) unsigned NOT NULL,
-  `content` varchar(100) NOT NULL,
-  `add_date` varchar(100) NOT NULL,
-  `attach` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL,   
-  KEY `add_date` (`add_date`)
-);";
-
-$db_table[] = "CREATE TABLE `wall_like` (
-  `id` INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
-  `wall` int(11) unsigned NOT NULL,
+  `rec_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `date` varchar(15) NOT NULL,
-  KEY `for_fast_select1` (`wall`,`user_id`),
+  KEY `for_fast_select1` (`rec_id`,`user_id`),
   KEY `date` (`date`)
 );";
