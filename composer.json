@@ -14,12 +14,12 @@
     "ext-iconv": "*",
     "ext-curl": "*",
     "ext-pdo": "*",
-    "sura/framework": "^0.2.0",
+    "sura/framework": "^0.3.8",
     "sura/view": "^2.0",
-    "sura/database": "^0.2",
+    "sura/database": "^0.3",
     "sinergi/browser-detector": "^6.1",
     "james-heinrich/getid3": "^2.0-dev",
-    "intervention/image": "3.0.*@beta"
+    "intervention/image": "3.8.*@beta"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
@@ -28,7 +28,7 @@
     "phpspec/prophecy": "^1.17",
     "phpspec/prophecy-phpunit": "^2.0",
     "phpstan/phpstan": "^1.10",
-    "phpunit/phpunit": "^9.6",
+    "phpunit/phpunit": "^11.3",
     "squizlabs/php_codesniffer": "^3.7"
   },
   "autoload": {
