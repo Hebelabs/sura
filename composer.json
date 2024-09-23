@@ -16,7 +16,7 @@
     "ext-pdo": "*",
     "sura/framework": "^0.3.8",
     "sura/view": "^2.0",
-    "sura/database": "^0.3",
+    "sura/database": "^1.0",
     "sinergi/browser-detector": "^6.1",
     "james-heinrich/getid3": "^2.0-dev",
     "intervention/image": "3.8.*@beta"
